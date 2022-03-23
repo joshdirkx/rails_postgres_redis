@@ -4,7 +4,6 @@ This repository demonstrates an application setup using Rails, Postgres, and Red
 
 The following changes from a vanilla Rails app have been applied
 
-
 ### config/application.rb
 
 ```
@@ -53,9 +52,8 @@ Allow Rails to receive requests from Release.
 
 ### db/migrate && app/models && app/controllers && app/jobs
 
-Added a migration to create a `users` table and with it a `User` model and `UsersController`. Also 
+Added a migration to create a `users` table and with it a `User` model and `UsersController`. Also
 created `CreateUsersJob` which will be used to create users asynchronously.
-
 
 ### lib/tasks/db_exists.rake
 
@@ -64,8 +62,12 @@ command in `docker-compose.yml`.
 
 ### Dockerfile
 
-The `Dockerfile` is based on alpine and installs the bare minimum packages to run Rails.
+The `Dockerfile` is based on alpine and installs the bare minimum packages to run Rails as well as the Doppler CLI.
 
 ### docker-compose.yml
 
 Defines the application and is used by Release to generate the Application Configuration.
+
+### Release Online Setup
+
+Navigate to your [account settings](https://docs.releasehub.com/reference-guide/account-settings) and [create a new build arg](https://docs.releasehub.com/reference-guide/account-settings/build-args).

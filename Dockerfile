@@ -2,6 +2,14 @@ FROM ruby:3.0.0-alpine
 RUN apk add --update --no-cache bash build-base nodejs tzdata postgresql-dev yarn shared-mime-info
 RUN gem install bundler
 
+# install the doppler cli
+RUN wget -q -t3 'https://packages.doppler.com/public/cli/rsa.8004D9FF50437357.key' -O /etc/apk/keys/cli@doppler-8004D9FF50437357.rsa.pub && \
+  echo 'https://packages.doppler.com/public/cli/alpine/any-version/main' | tee -a /etc/apk/repositories && \
+  apk add doppler
+
+# start doppler
+RUN doppler run -- npm start
+
 WORKDIR /app
 
 COPY package.json yarn.lock ./
