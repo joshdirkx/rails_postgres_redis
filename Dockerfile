@@ -11,9 +11,6 @@ RUN wget -q -t3 'https://packages.doppler.com/public/cli/rsa.8004D9FF50437357.ke
   echo 'https://packages.doppler.com/public/cli/alpine/any-version/main' | tee -a /etc/apk/repositories && \
   apk add doppler
 
-# start doppler
-RUN doppler run -- npm start
-
 WORKDIR /app
 
 COPY package.json yarn.lock ./
@@ -25,4 +22,4 @@ RUN bundle check || bundle install --verbose --jobs 20 --retry 5
 COPY . ./
 
 # Start the main process.
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+CMD ["./start.sh"]
